@@ -14,8 +14,10 @@ let sHighScore = document.querySelector(".sHighScore");
 let ran = Math.trunc(Math.random() * 20) + 1;
 let sc = 20;
 let hs = 0;
-// let sc = Number(sScore.textContent);
-// let hs = Number(sHighScore.textContent);
+
+function displayMessage(mes) {
+  message.textContent = mes;
+}
 
 check.addEventListener("click", function () {
   // console.log("***********Check***********");
@@ -28,10 +30,10 @@ check.addEventListener("click", function () {
   console.log("guess", num, typeof Number(num));
 
   if (!guess.value || Number(guess.value) == 0) {
-    message.textContent = "⛔️ No number!";
+    displayMessage("⛔️ No number!");
   } else {
-    if (Number(guess.value) == ran) {
-      message.textContent = "🎉 Correct Number!";
+    if (Number(guess.value) === ran) {
+      displayMessage("🎉 Correct Number!");
       number.textContent = guess.value;
       document.body.style.background = "#acd";
       // document.querySelector("body").style.background = "#acd";
@@ -43,15 +45,27 @@ check.addEventListener("click", function () {
         hs = sc;
         sHighScore.textContent = hs;
       }
-    } else if (Number(guess.value) > ran) {
-      message.textContent = "📈 Too high!";
-      sc -= 1;
-      sScore.textContent = sc;
-    } else {
-      message.textContent = "📉 Too low!";
-      sc -= 1;
-      sScore.textContent = sc;
+    } else if (Number(guess.value) !== ran) {
+      if (sc > 1) {
+        Number(guess.value) > ran
+          ? displayMessage("📈 Too high!")
+          : displayMessage("📉 Too low!");
+        sc -= 1;
+        sScore.textContent = sc;
+      } else {
+        displayMessage("💥 You lost the game!");
+        sScore.textContent = 0;
+      }
     }
+    // if (Number(guess.value) > ran) {
+    //   message.textContent = "📈 Too high!";
+    //   sc -= 1;
+    //   sScore.textContent = sc;
+    // } else {
+    //   message.textContent = "📉 Too low!";
+    //   sc -= 1;
+    //   sScore.textContent = sc;
+    // }
   }
   // console.log("score", sc);
   // console.log("highScore", hs);
@@ -69,7 +83,7 @@ again.addEventListener("click", function () {
   document.body.style.background = "#222";
   guess.value = "";
   number.textContent = "?";
-  message.textContent = "Start guessing...";
+  displayMessage("Start guessing...");
   number.style.width = "15rem";
 
   // console.log("score", sc);
