@@ -20,12 +20,6 @@ function displayMessage(mes) {
 }
 
 check.addEventListener("click", function () {
-  // console.log("***********Check***********");
-  // console.log(guess);
-  // console.log("random", ran);
-  // console.log("score", sc);
-  // console.log("highScore", hs);
-
   let num = Number(guess.value);
   console.log("guess", num, typeof Number(num));
 
@@ -36,7 +30,6 @@ check.addEventListener("click", function () {
       displayMessage("🎉 Correct Number!");
       number.textContent = guess.value;
       document.body.style.background = "#acd";
-      // document.querySelector("body").style.background = "#acd";
       document.querySelector(".number").style.width = "30rem";
 
       if (hs >= sc) {
@@ -57,25 +50,10 @@ check.addEventListener("click", function () {
         sScore.textContent = 0;
       }
     }
-    // if (Number(guess.value) > ran) {
-    //   message.textContent = "📈 Too high!";
-    //   sc -= 1;
-    //   sScore.textContent = sc;
-    // } else {
-    //   message.textContent = "📉 Too low!";
-    //   sc -= 1;
-    //   sScore.textContent = sc;
-    // }
   }
-  // console.log("score", sc);
-  // console.log("highScore", hs);
 });
 
 again.addEventListener("click", function () {
-  // console.log("***********Again***********");
-  // console.log("score", sc);
-  // console.log("highScore", hs);
-
   sc = 20;
   sScore.textContent = sc;
   ran = Math.trunc(Math.random() * 20) + 1;
@@ -85,7 +63,4 @@ again.addEventListener("click", function () {
   number.textContent = "?";
   displayMessage("Start guessing...");
   number.style.width = "15rem";
-
-  // console.log("score", sc);
-  // console.log("highScore", hs);
 });
